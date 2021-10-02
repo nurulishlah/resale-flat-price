@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+            rel="stylesheet"
+        />
+        <title>Aplikasi Prediksi Biaya Asuransi</title>
+    </head>
+    <body
+        class="
+            flex flex-col
+            justify-between
+            item-center
+            p-8
+            min-h-screen
+            bg-gradient-to-r
+            from-green-400
+            to-blue-500
+            text-gray-800
+            md:flex-row
+        "
+    >
+        <main class="bg-white p-16 rounded-lg">
+            <h1 class="text-3xl font-bold mb-8">
+                Prediksi Harga Flat:
+            </h1>
+
+            <form
+                action="{{ url_for('predict') }}"
+                method="post"
+                class="flex flex-col"
+            >
+
+                <label for="Tipe Flat" class="mt-4 mb-2"
+                    >Tipe Flat:</label
+                >
+                <select
+                    name="Tipe Flat"
+                    id="Tipe Flat"
+                    class="p-4 bg-gray-100 rounded-md"
+                >
+                    <option value="1">4 ROOM</option>
+                    <option value="2">5 ROOM</option>
+                    <option value="3">3 ROOM</option>
+                    <option value="4">EXECUTIVE</option>
+                    <option value="5">2 ROOM</option>
+                    <option value="6">MULTI-GENERATION</option>
+                    <option value="7">1 ROOM</option>
+                </select>
+
+                <br>
+
+                <label for="Ukuran Flat" class="mb-2">Ukuran Flat (m2)</label>
+                <input
+                    type="text"
+                    name="Ukuran Flat"
+                    placeholder="Ukuran Flat"
+                    required="required"
+                    class="p-4 bg-gray-100 rounded-md"
+                />
+
+                <br>
+
+                <label for="Tahun Mulai Disewakan" class="mb-2">
+                    Tahun Mulai Disewakan (m2)
+                </label>
+                <input
+                    type="text"
+                    name="Tahun Mulai Disewakan"
+                    placeholder="Rentang tahun 1966 - 2019"
+                    required="required"
+                    class="p-4 bg-gray-100 rounded-md"
+                />
+
+                <button
+                    type="submit"
+                    class="
+                        flex
+                        justify-center
+                        align-center
+                        mt-8
+                        p-4
+                        bg-gradient-to-r
+                        from-green-400
+                        to-blue-500
+                        text-white
+                        rounded-md
+                    "
+                >
+                    HITUNG ESTIMASI
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="feather feather-arrow-right ml-4"
+                    >
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </form>
+        </main>
+        <section class="mt-8 h-full flex-auto rounded-lg md:mt-0 md:ml-8">
+            <div class="bg-white p-16 rounded-lg">
+                <h1 class="text-2xl mb-8">
+                    Estimasi harga flat kriteria Anda adalah
+                </h1>
+                <h2 class="text-5xl font-bold">USD {{ resale_price }}</h2>
+                {% if (resale_price) != 0 %}
+                <div class="mt-8">
+                    <p>Tipe Flat: {{ flat_type }} </p>
+                    <p>Luas Lantai: {{ size }} m2</p>
+                </div>
+                {% endif %}
+            </div>
+            <div class="flex justify-around bg-white p-16 rounded-lg mt-8">
+                <img
+                    class="h-24 md:h-28"
+                    src="https://digitalent.kominfo.go.id/assets/@images/logo.png"
+                    alt="logo-dts"
+                />
+                <img
+                    class="h-24 md:h-28"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo_of_Ministry_of_Communication_and_Information_Technology_of_the_Republic_of_Indonesia.svg/604px-Logo_of_Ministry_of_Communication_and_Information_Technology_of_the_Republic_of_Indonesia.svg.png"
+                    alt="logo-kominfo"
+                />
+            </div>
+        </section>
+    </body>
+</html>
